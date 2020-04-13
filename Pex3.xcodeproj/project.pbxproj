@@ -1,0 +1,308 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50C309A4243E596800AB0053 /* PEX3Shunting.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C3099B243E596800AB0053 /* PEX3Shunting.c */; };
+		50C309A5243E596800AB0053 /* PEX3_Queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C3099D243E596800AB0053 /* PEX3_Queue.c */; };
+		50C309A6243E596800AB0053 /* pex3main.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C3099F243E596800AB0053 /* pex3main.c */; };
+		50C309A7243E596800AB0053 /* PEX3_mathematicalFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C309A1243E596800AB0053 /* PEX3_mathematicalFunctions.c */; };
+		50C309A8243E596800AB0053 /* PEX3_Stack.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C309A3243E596800AB0053 /* PEX3_Stack.c */; };
+		50C309AB243E6A8200AB0053 /* listAsLinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C309A9243E6A8200AB0053 /* listAsLinkedList.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		50C3098F243E589200AB0053 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		50C30991243E589200AB0053 /* Pex3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Pex3; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C3099B243E596800AB0053 /* PEX3Shunting.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEX3Shunting.c; sourceTree = "<group>"; };
+		50C3099C243E596800AB0053 /* PEX3_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEX3_queue.h; sourceTree = "<group>"; };
+		50C3099D243E596800AB0053 /* PEX3_Queue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEX3_Queue.c; sourceTree = "<group>"; };
+		50C3099E243E596800AB0053 /* PEX3_mathematicalFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEX3_mathematicalFunctions.h; sourceTree = "<group>"; };
+		50C3099F243E596800AB0053 /* pex3main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pex3main.c; sourceTree = "<group>"; };
+		50C309A0243E596800AB0053 /* PEX3_Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEX3_Stack.h; sourceTree = "<group>"; };
+		50C309A1243E596800AB0053 /* PEX3_mathematicalFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEX3_mathematicalFunctions.c; sourceTree = "<group>"; };
+		50C309A2243E596800AB0053 /* PEX3Shunting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEX3Shunting.h; sourceTree = "<group>"; };
+		50C309A3243E596800AB0053 /* PEX3_Stack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEX3_Stack.c; sourceTree = "<group>"; };
+		50C309A9243E6A8200AB0053 /* listAsLinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = listAsLinkedList.c; sourceTree = "<group>"; };
+		50C309AA243E6A8200AB0053 /* listAsLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = listAsLinkedList.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50C3098E243E589200AB0053 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50C30988243E589200AB0053 = {
+			isa = PBXGroup;
+			children = (
+				50C30993243E589200AB0053 /* Pex3 */,
+				50C30992243E589200AB0053 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50C30992243E589200AB0053 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50C30991243E589200AB0053 /* Pex3 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50C30993243E589200AB0053 /* Pex3 */ = {
+			isa = PBXGroup;
+			children = (
+				50C309A9243E6A8200AB0053 /* listAsLinkedList.c */,
+				50C309AA243E6A8200AB0053 /* listAsLinkedList.h */,
+				50C309A1243E596800AB0053 /* PEX3_mathematicalFunctions.c */,
+				50C3099E243E596800AB0053 /* PEX3_mathematicalFunctions.h */,
+				50C3099D243E596800AB0053 /* PEX3_Queue.c */,
+				50C3099C243E596800AB0053 /* PEX3_queue.h */,
+				50C309A3243E596800AB0053 /* PEX3_Stack.c */,
+				50C309A0243E596800AB0053 /* PEX3_Stack.h */,
+				50C3099F243E596800AB0053 /* pex3main.c */,
+				50C3099B243E596800AB0053 /* PEX3Shunting.c */,
+				50C309A2243E596800AB0053 /* PEX3Shunting.h */,
+			);
+			path = Pex3;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50C30990243E589200AB0053 /* Pex3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50C30998243E589200AB0053 /* Build configuration list for PBXNativeTarget "Pex3" */;
+			buildPhases = (
+				50C3098D243E589200AB0053 /* Sources */,
+				50C3098E243E589200AB0053 /* Frameworks */,
+				50C3098F243E589200AB0053 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pex3;
+			productName = Pex3;
+			productReference = 50C30991243E589200AB0053 /* Pex3 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50C30989243E589200AB0053 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Max DiLalla ";
+				TargetAttributes = {
+					50C30990243E589200AB0053 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = 50C3098C243E589200AB0053 /* Build configuration list for PBXProject "Pex3" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 50C30988243E589200AB0053;
+			productRefGroup = 50C30992243E589200AB0053 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50C30990243E589200AB0053 /* Pex3 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50C3098D243E589200AB0053 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50C309AB243E6A8200AB0053 /* listAsLinkedList.c in Sources */,
+				50C309A6243E596800AB0053 /* pex3main.c in Sources */,
+				50C309A7243E596800AB0053 /* PEX3_mathematicalFunctions.c in Sources */,
+				50C309A5243E596800AB0053 /* PEX3_Queue.c in Sources */,
+				50C309A8243E596800AB0053 /* PEX3_Stack.c in Sources */,
+				50C309A4243E596800AB0053 /* PEX3Shunting.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		50C30996243E589200AB0053 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		50C30997243E589200AB0053 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		50C30999243E589200AB0053 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		50C3099A243E589200AB0053 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50C3098C243E589200AB0053 /* Build configuration list for PBXProject "Pex3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50C30996243E589200AB0053 /* Debug */,
+				50C30997243E589200AB0053 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50C30998243E589200AB0053 /* Build configuration list for PBXNativeTarget "Pex3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50C30999243E589200AB0053 /* Debug */,
+				50C3099A243E589200AB0053 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50C30989243E589200AB0053 /* Project object */;
+}
