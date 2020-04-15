@@ -225,41 +225,38 @@ bool isMixedNum(char* num) {
 
 
 /** convertMixedToFraction takes a mixed number and returns the equivalent number in fraction form
-* @param - mixedNum is the number to convert
-* @return - the number in equivalent fraction form*/
-//char* convertMixedToFraction(char* mixedNum) {
-//	bool neg = false;
-//	int count = 0;
-//	if (mixedNum[0] == '-') {
-//		neg = true;
-//		count++;
-//	}
-//
-//	char* coeff = malloc(sizeof(char)*22); //making copies in order to use strtok three times to get all numbers
-//	strcpy(coeff, mixedNum);
-//	char* numerator = malloc(sizeof(char) * 22);
-//	strcpy(numerator, mixedNum);
-//	char* denominator = malloc(sizeof(char) * 22);
-//	strcpy(denominator, mixedNum);
-//	
-//	strtok(coeff, " "); //getting big num
-//	numerator += strlen(coeff) + 1; //updating both other character pointers to use strtok again
-//	denominator += strlen(coeff) + 1;
-//
-//	strtok(numerator, "/");
-//	denominator += strlen(denominator) + 1;
-//	
-//	strtok(denominator, " ");
-//
-//	int coe = 0;
-//	int numer = 0;
-//	int denom = 0;
-//	sprintf(coeff, "%d", coe);
-//	sprintf(numerator, "%d", numer);
-//	sprintf(denominator, "%d", denom);
-//
-//	numer = coe * denom + numer;
-//	char* finalFrac = reduceFrac(numer, denom);
-//
-//	return finalFrac;
-//}
+* @param  mixedNum is the number to convert
+* @return  the number in equivalent fraction form*/
+char* convertMixedToFraction(char* mixedNum) {
+	bool neg = false;
+	int count = 0;
+	if (mixedNum[0] == '-') {
+		neg = true;
+		count++;
+	}
+
+	char* coeff = malloc(sizeof(mixedNum)); //making copies in order to use strtok three times to get all numbers
+	strcpy(coeff, mixedNum);
+	char* numerator = malloc(sizeof(mixedNum));
+	strcpy(numerator, mixedNum);
+	char* denominator = malloc(sizeof(mixedNum));
+	strcpy(denominator, mixedNum);
+	
+	strtok(coeff, " "); //getting big num
+	numerator += strlen(coeff) + 1; //updating both other character pointers to use strtok again
+	denominator += strlen(coeff) + 1;
+
+	strtok(numerator, "/");
+	denominator += strlen(denominator);
+	
+	strtok(denominator, " ");
+
+	int coe = atoi(coeff);
+	int numer = atoi(numerator);
+	int denom = atoi(denominator);
+
+	numer = coe * denom + numer;
+	char* finalFrac = reduceFrac(numer, denom);
+    
+	return finalFrac;
+}

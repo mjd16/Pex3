@@ -62,11 +62,11 @@ Parameters:
 Returns:
     - is a boolean indicating whether it is a mixed number or not */
 bool isMixedNum(char* num);
-//
-///** convertMixedToFraction takes a mixed number and returns the equivalent number in fraction form
-//* @param - mixedNum is the number to convert
-//* @return - the number in equivalent fraction form*/
-//char* convertMixedToFraction(char* mixedNum);
+
+/** convertMixedToFraction takes a mixed number and returns the equivalent number in fraction form
+* @param  mixedNum is the number to convert
+* @return  the number in equivalent fraction form*/
+char* convertMixedToFraction(char* mixedNum);
 
 
 

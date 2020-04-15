@@ -60,31 +60,20 @@ char* convertToRPN(char* str, char* output, Stack* opStack)
             if (stackPeek(*opStack) == (int)'(')
                 stackPop(opStack);
         }
-        
-        //while there is anything left, pop them all to the output queue
-        while (!stackIsEmpty(*opStack)){
-            popped = convertIntToChar(stackPop(opStack));
-            if (popped == ')' || popped == '('){
-                strcpy(output,"Error with parenthesis");
-                return output;
-            }
-            sprintf(temp, "%s%c", output, popped);
-            strcpy(output, temp);
-            strcat(output, " ");
-        }
-        
+
     }
+    //while there is anything left, pop them all to the output queue
     while (!stackIsEmpty(*opStack)){
-        if (token[0] == ')' || token[0] == ')'){
-            printf("Error, mismatched parenthesis\n");
+        popped = convertIntToChar(stackPop(opStack));
+        if (popped == ')' || popped == '('){
+            strcpy(output,"Error with parenthesis");
             return output;
         }
-        char popped = convertIntToChar(stackPop(opStack));
-        char* temp = "nothing";
         sprintf(temp, "%s%c", output, popped);
         strcpy(output, temp);
         strcat(output, " ");
     }
+    
     return output;
 }
 
@@ -103,7 +92,9 @@ bool isNum(char* tok){
 }
 
 bool isCharOp(char op){
-    return strchr("+-x/^", op);
+    if (strchr("+-x/^", op) != NULL)
+        return true;
+    return false;
 }
 
 int precedence(char op){
@@ -125,8 +116,9 @@ int precedence(char op){
     return aval[ascii];
 }
 
-char convertIntToChar(int charac){
-    return charac + '0';
+char convertIntToChar(int charac)
+{
+    return charac;
 }
 
 bool isValidString(char* str);
@@ -156,5 +148,7 @@ char* getToken(char* str){
 
 //working on the loop dealing with characters being the token
 bool popOperators(char op1, char op2, Stack* opStack){
-    return precedence(op2) > precedence(op1) || ((precedence(op2) == precedence(op1)) && op1 == '^');
+    if (stackIsEmpty(*opStack))
+        return false;
+    return precedence(op2) > precedence(op1) || ((precedence(op2) == precedence(op1)) && op1 != '^');
 }
