@@ -16,11 +16,11 @@
 #include <stdlib.h>
 
 int main() {
-    char tester[35] = "3 + 4 × 2 / ( 1 − 5 ) ^ 2 ^ 3"; // "4 + 3 * 8"
+    char tester[35] = "3 + 4 * 2 / ( 1 − 5 ) ^ 2 ^ 3"; // "4 + 3 * 8"
     Stack* opStack = stackInit();
     char output[255] = "";
     char* retu = convertToRPN(tester, output, opStack);
-    printf("String: %s\nGives: %s\nShould be: %s\n", tester, retu, "3 4 2 × 1 5 − 2 3 ^ ^ / +"); // "4 3 8 * +"
+    printf("String: %s\nGives: %s\nShould be: %s\n", tester, retu, "3 4 2 * 1 5 − 2 3 ^ ^ / +"); // "4 3 8 * +"
     
 //	int num1 = 7;
 //	int den1 = 4;
