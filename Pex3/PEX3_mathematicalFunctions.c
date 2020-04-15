@@ -197,30 +197,74 @@ bool isMixedNum(char* num) {
 	if (num[0] == '-') {
 		num++;
 	}
-	//getting passed the first number and checking that the next character is a space
-	int i = 0;
-	while (num[i] != ' ' && num[i+1] != '\0') {
-		i++;
-	}
-	//checking the next is a digit
-	i++;
-	if (!isdigit(num[i])) {
-		return false;
-	}
-	i++;
-		//checking the next is a space
-        //need to do something if it is a double digit number
-		if (num[i] != ' ')
-			return false;
-		i++;
-		//Checking next is a slash
-			if (num[i] != '/')
-				return false;
-	//anything after that is irrelevant, it must be a mixed number
-	i += 2;
-	if (!isdigit(num[i])) {
-		printf("Improper number entered");
-	}
+
+    bool gotWhole = false;
+    bool gotNumer = false;
+    bool gotDenom = false;
+    
+    char whole[20] = "";
+    char numer[20] = "";
+    char denom[20] = "";
+    
+    int i = 0;
+    
+    if (!isdigit((int)num[i]))
+        return false;
+    
+    //getting the first number
+    while (!gotWhole){
+        if (num[i] == '\0' || num[i+1] == '\0')
+            return false;
+        if (num[i+1] == ' '){
+            gotWhole = true;
+            strncat(whole, num, 1);
+        }
+        else if (isdigit(num[i+1])){
+            strncat(whole, num, 1);
+        }
+        else
+            return false;
+        i++;
+    }
+    num += i + 1;
+    i = 0;
+    //getting the second number
+    while (!gotNumer){
+        if (num[i] == '\0' || num[i+1] == '\0')
+            return false;
+        if (num[i + 1] == ' ' || num[i+1] == '/'){
+            gotNumer = true;
+            strncat(numer, num, 1);
+        }
+        else if (isdigit(num[i+1])){
+            strncat(numer, num, 1);
+        }
+        else
+            return false;
+        i++;
+    }
+    num += i + 1;
+    i = 0;
+    if (num[i] == '/' || num[i] == ' ')
+        num += 1;
+    //getting the last number
+    while (!gotDenom){
+        if (num[i] == '\0')
+            return false;
+        if (num[i] == ' ')
+            i++;
+        if (num[i+1] == '\0' || num[i] == '\0'){
+            gotDenom = true;
+            strncat(denom, num, 1);
+            return true;
+        }
+        else if (isdigit(num[i+1])){
+            strncat(numer, num, 1);
+        }
+        else
+            return false;
+        i++;
+    }
     return false;
 }
 
@@ -228,36 +272,72 @@ bool isMixedNum(char* num) {
 /** convertMixedToFraction takes a mixed number and returns the equivalent number in fraction form
 * @param  mixedNum is the number to convert
 * @return  the number in equivalent fraction form*/
-char* convertMixedToFraction(char* mixedNum) {
-	bool neg = false;
-	int count = 0;
-	if (mixedNum[0] == '-') {
-		neg = true;
-		count++;
-	}
+char* convertMixedToFraction(char* num) {
+    bool isNeg = false;
+    if (num[0] == '-') {
+        isNeg = true;
+        num++;
+    }
 
-	char* coeff = malloc(sizeof(mixedNum)); //making copies in order to use strtok three times to get all numbers
-	strcpy(coeff, mixedNum);
-	char* numerator = malloc(sizeof(mixedNum));
-	strcpy(numerator, mixedNum);
-	char* denominator = malloc(sizeof(mixedNum));
-	strcpy(denominator, mixedNum);
-	
-	strtok(coeff, " "); //getting big num
-	numerator += strlen(coeff) + 1; //updating both other character pointers to use strtok again
-	denominator += strlen(coeff) + 1;
-
-	strtok(numerator, "/");
-	denominator += strlen(denominator);
-	
-	strtok(denominator, " ");
-
-	int coe = atoi(coeff);
-	int numer = atoi(numerator);
-	int denom = atoi(denominator);
-
-	numer = coe * denom + numer;
-	char* finalFrac = reduceFrac(numer, denom);
+    bool gotWhole = false;
+    bool gotNumer = false;
+    bool gotDenom = false;
     
-	return finalFrac;
+    char whole[20] = "";
+    char numer[20] = "";
+    char denom[20] = "";
+    
+    int i = 0;
+    
+    //getting the first number
+    while (!gotWhole){
+        if (num[i+1] == ' '){
+            gotWhole = true;
+            strncat(whole, num, 1);
+        }
+        else if (isdigit(num[i+1])){
+            strncat(whole, num, 1);
+        }
+        i++;
+    }
+    num += i + 1;
+    i = 0;
+    //getting the second number
+    while (!gotNumer){
+        if (num[i + 1] == ' ' || num[i+1] == '/'){
+            gotNumer = true;
+            strncat(numer, num, 1);
+        }
+        else if (isdigit(num[i+1])){
+            strncat(numer, num, 1);
+        }
+        num++;
+    }
+    num += i + 1;
+    i = 0;
+    if (num[i] == '/' || num[i] == ' ')
+        num += 1;
+    //getting the last number
+    while (!gotDenom){
+        if (num[i] == ' ')
+            num += 1;
+        if (num[i+1] == '\0' || num[i] == '\0'){
+            gotDenom = true;
+            strncat(denom, num, 1);
+        }
+        else if (isdigit(num[i+1])){
+            strncat(denom, num, 1);
+        }
+        num++;
+    }
+    int wholeNum = atoi(whole);
+    int numerator = atoi(numer);
+    int denominator = atoi(denom);
+
+    int newTop = wholeNum * denominator;
+    numerator =  newTop + numerator;
+    if(isNeg)
+        numerator = numerator * -1;
+    char* output = reduceFrac(numerator,denominator);
+    return output;
 }
