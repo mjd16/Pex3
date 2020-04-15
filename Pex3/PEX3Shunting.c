@@ -13,7 +13,7 @@
 
 char* convertToRPN(char* str, char* output, Stack* opStack)
 {
-    char token[22];
+    char token[35];
     char popped;
     char temp[255];
     
@@ -92,7 +92,7 @@ bool isNum(char* tok){
 }
 
 bool isCharOp(char op){
-    if (strchr("+-x/^", op) != NULL)
+    if (strchr("+-*/^", op) != NULL)
         return true;
     return false;
 }

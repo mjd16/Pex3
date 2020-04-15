@@ -199,7 +199,7 @@ bool isMixedNum(char* num) {
 	}
 	//getting passed the first number and checking that the next character is a space
 	int i = 0;
-	while (num[i] != ' ') {
+	while (num[i] != ' ' && num[i+1] != '\0') {
 		i++;
 	}
 	//checking the next is a digit
@@ -209,6 +209,7 @@ bool isMixedNum(char* num) {
 	}
 	i++;
 		//checking the next is a space
+        //need to do something if it is a double digit number
 		if (num[i] != ' ')
 			return false;
 		i++;

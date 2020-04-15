@@ -16,11 +16,12 @@
 #include <stdlib.h>
 
 int main() {
-    char* tester = "4 + 3 * 8";
+    char tester[35] = "4 + 3 * 8"; //"3 + 4 × 2 / ( 1 − 5 ) ^ 2 ^ 3"
     Stack* opStack = stackInit();
-    char output[255];
+    char output[255] = "";
     char* retu = convertToRPN(tester, output, opStack);
-    printf("%s\n%s\n\n\n", tester, retu);
+    printf("String: %s\nGives: %s\nShould be: %s\n", tester, retu, "4 3 8 * +"); //"3 4 2 × 1 5 − 2 3 ^ ^ / +"
+    //printf("\n\n");
     
 //	int num1 = 7;
 //	int den1 = 4;
@@ -86,12 +87,12 @@ int main() {
 //		printf("%s is not a mixed number \n\n", te4);
 
 	// Testing the mixed number to improper fraction function
-//	char* te5 = "2 3 / 4\n";
-//	char* te6 = "-4 2 / 3\n";
-//	char* mixedNum = malloc(sizeof(char)*22);
-//	mixedNum = convertMixedToFraction(te5);
-//	char* mixedNum1 = malloc(sizeof(char) * 22);
-//	mixedNum1 = convertMixedToFraction(te6);
+//	char te5[30] = "2 3 / 4";
+//	char te6[30] = "-4 2 / 3";
+//	char mixedNum[30] = "";
+//	strcpy(mixedNum, convertMixedToFraction(te5));
+//	char mixedNum1[30] = "";
+//	strcpy(mixedNum1, convertMixedToFraction(te6));
 //	printf("%s as an improper fraction is %s\n", te5, mixedNum);
 //	printf("%s as an improper fraction is %s\n", te6, mixedNum1);
 
