@@ -194,10 +194,19 @@ Parameters:
 Returns:
     - is a boolean indicating whether it is a mixed number or not */
 bool isMixedNum(char* num) {
+
+    
 	if (num[0] == '-') {
 		num++;
 	}
-
+    
+    int c = 0;
+    while (num[c] != '\0'){
+        if (strchr("*+-^", num[c]))
+            return false;
+        c++;
+    }
+    
     bool gotWhole = false;
     bool gotNumer = false;
     bool gotDenom = false;

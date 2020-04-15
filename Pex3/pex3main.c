@@ -16,11 +16,11 @@
 #include <stdlib.h>
 
 int main() {
-    char tester[35] = "4 + 3 * 8"; //"3 + 4 × 2 / ( 1 − 5 ) ^ 2 ^ 3"
+    char tester[35] = "3 + 4 × 2 / ( 1 − 5 ) ^ 2 ^ 3"; // "4 + 3 * 8"
     Stack* opStack = stackInit();
     char output[255] = "";
     char* retu = convertToRPN(tester, output, opStack);
-    printf("String: %s\nGives: %s\nShould be: %s\n", tester, retu, "4 3 8 * +"); //"3 4 2 × 1 5 − 2 3 ^ ^ / +"
+    printf("String: %s\nGives: %s\nShould be: %s\n", tester, retu, "3 4 2 × 1 5 − 2 3 ^ ^ / +"); // "4 3 8 * +"
     
 //	int num1 = 7;
 //	int den1 = 4;
@@ -39,7 +39,7 @@ int main() {
 
 
 //Testing the is mixed number function
-//	char te1[22] = "22 3 / 4";
+//	char te1[22] = "3 * 8";
 //	if (isMixedNum(te1))
 //		printf("%s is a mixed number \n", te1);
 //	else
