@@ -28,16 +28,21 @@ char* convertToRPN(char* str, char* output, Stack* opStack)
     while (str[0] != '\0'){
         //read a token
         strcpy(token, getToken(str));
-        if (token[0] != '(')
-            str = str + strlen(token) + 1;
-        else
+        if (token[0] != '(') {
+            if (str[strlen(token)] != ')') {
+                str = str + strlen(token) + 1;
+            } else {
+                str += strlen(token);
+            }
+        } else {
             str++;
+        }
         
         bool mixed = false;
         
         //if its a mixed num, push it to output and get the next token
         if (isMixedNum(token)){
-            strcpy(token, convertMixedToFraction(token));
+            //strcpy(token, convertMixedToFraction(token)); choosing not to convert it now in order to detect mixed nums later
             mixed = true;
             strcat(output, token);
             strcat(output, " ");
@@ -60,7 +65,7 @@ char* convertToRPN(char* str, char* output, Stack* opStack)
             stackPush(opStack, (int)op);
         }
         //if it is a left parenthesis
-        else if (token[0] == '('){
+        else if (token[0] == '(' && !mixed){
             stackPush(opStack, token[0]);
         }
         //if it is a right parenthesis, pop the operators to the output queue
@@ -194,7 +199,7 @@ char* getToken(char* str){
             loc++;
         }
         strcpy(ret, str);
-        ret[loc-1] = '\0';
+        ret[loc+1] = '\0';
         return ret;
     }
     

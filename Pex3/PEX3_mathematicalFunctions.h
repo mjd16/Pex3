@@ -13,6 +13,11 @@
 #include <math.h>
 #include <stdlib.h>
 
+/** doAllMath will take an entire postix equation and return the answer
+ @param str is the postfix string
+ @return the result of the equation*/
+char* doAllMath(char* str);
+
 /** bigMath() - handles mathematical operations based on input
  * @param num1 and num 2 are the doubles to be operated on
  * @return the double value of the result */
@@ -25,33 +30,30 @@ double bigMath(double num1, double num2, char operation);
 char* bigMathTwoFrac(int num1, int num2, int num3, int num4, char op);
 
 /**bigMathOneFracFracFirst() - handles mathematical operations for a fraction and normal number where the fraction comes first
-* @Param num and denom are the numerator and denominator of the fraction and number is the normal number
-* @Param op is the character representing the operation to be done
-* @Return character pointer to string of the resulting fraction*/
-char* bigMathOneFracFracFirst(int num1, int num2, int num3, char op);
+ * @Param num and denom are the numerator and denominator of the fraction and number is the normal number
+ * @Param op is the character representing the operation to be done
+ * @Return character pointer to string of the resulting fraction*/
+char* bigMathOneFracFracFirst(int num, int denom, int number, char op);
 
-/**
-reduceFrac() - reduces an inputted fraction to its simplest form
-- Parameters:
-  - num1 and num2 are the numerator and denominator of the fraction
-  - op is the character representing the operation to be done
-- returns:
-  - character pointer to string of the resulting fraction*/
+/**bigMathOneFracWholeFirst() - handles mathematical operations for a fraction and normal number where the fraction comes first
+ * @Param num and denom are the numerator and denominator of the fraction and number is the normal number
+ * @Param op is the character representing the operation to be done
+ * @Return character pointer to string of the resulting fraction*/
+char* bigMathOneFracWholeFirst(int num, int denom, int number, char op);
+
+/**reduceFrac() reduces an inputted fraction to its simplest form
+@param numer and denom are the numerator and denominator of the fraction
+@return character pointer to string of the resulting fraction*/
 char* reduceFrac(int numer, int denom);
 
-/**
-gcd() - finds the greatest common denominator of two numbers
-- Parameters
-   - num1 and num2 are the numerator and denominator of a fraction
--Returns:
-   - greatest common denominator of a numerator and denominator*/
+/**gcd()  finds the greatest common denominator of two numbers
+@param one and two are the numerator and denominator of a fraction
+@return greatest common denominator of a numerator and denominator*/
 int gcd(int one, int two);
 
 /** isMixedNum determines if a number inputted is a mixed number or not
-Parameters:
-    - num is the number to be checked
-Returns:
-    - is a boolean indicating whether it is a mixed number or not */
+@param num is the string to be checked
+@return a boolean indicating whether it is a mixed number or not */
 bool isMixedNum(char* num);
 
 /** convertMixedToFraction takes a mixed number and returns the equivalent number in fraction form

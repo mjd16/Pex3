@@ -15,6 +15,11 @@
 #include <ctype.h>
 #include "PEX3_mathematicalFunctions.h"
 
+/** doAllMath will take an entire postix equation and return the answer
+ @param str is the postfix string
+ @return the result of the equation*/
+char* doAllMath(char* str);
+
 
  /** bigMath() - handles mathematical operations based on input
   * @param num1 and num 2 are the doubles to be operated on
@@ -136,13 +141,56 @@ char* bigMathOneFracFracFirst(int num, int denom, int number, char op) {
 	}
 }
 
-/**
-reduceFrac() - reduces an inputted fraction to its simplest form
-- Parameters:
-  - num1 and num2 are the numerator and denominator of the fraction
-  - op is the character representing the operation to be done
-- returns:
-  - character pointer to string of the resulting fraction*/
+/**bigMathOneFracWholeFirst() - handles mathematical operations for a fraction and normal number where the fraction comes first
+ * @Param num and denom are the numerator and denominator of the fraction and number is the normal number
+ * @Param op is the character representing the operation to be done
+ * @Return character pointer to string of the resulting fraction*/
+char* bigMathOneFracWholeFirst(int num, int denom, int number, char op) {
+    char* ret;
+    int numerator = 0; //numerator of resulting fraction
+    int denominator = 0; //denominator of resulting fraction
+    int place1 = 0;
+    double exp = 0.0;
+    double ans = 0.0;
+    switch (op) {
+    case '+':
+        place1 = denom * number;
+        numerator = num + place1;
+        denominator = denom;
+        ret = reduceFrac(numerator, denominator);
+        return ret;
+    case '-':
+        place1 = denom * number;
+        numerator = num - place1;
+        denominator = denom;
+        ret = reduceFrac(numerator, denominator);
+        return ret;
+    case '*':
+        numerator = num * number;
+        denominator = denom;
+        ret = reduceFrac(numerator, denominator);
+        return ret;
+    case '/':
+        numerator = denom * number;
+            denominator = num;
+        ret = reduceFrac(numerator, denominator);
+        return ret;
+    case '^':
+        exp = (double)num / denom;
+        ans = pow(number, exp);
+        ret = malloc(sizeof(char)*22);
+        sprintf(ret,"%.2lf",ans);
+        return ret;
+
+    default:
+        ret = "No result";
+        return ret;
+    }
+}
+
+/**reduceFrac() reduces an inputted fraction to its simplest form
+ @param numer and denom are the numerator and denominator of the fraction
+ @return character pointer to string of the resulting fraction*/
 char* reduceFrac(int numer, int denom) {
 	int num1 = 0;
 	int num2 = 0;
@@ -163,12 +211,9 @@ char* reduceFrac(int numer, int denom) {
 	return retu;
 }
 
-/**
- gcd() - finds the greatest common denominator of two numbers
- - Parameters
-    - num1 and num2 are the numerator and denominator of a fraction
- -Returns:
-    - greatest common denominator of a numerator and denominator*/
+/**gcd()  finds the greatest common denominator of two numbers
+ @param one and two are the numerator and denominator of a fraction
+ @return greatest common denominator of a numerator and denominator*/
 int gcd(int one, int two) {
 	int remain = 0;
 		while (one != 0) {
@@ -180,10 +225,8 @@ int gcd(int one, int two) {
 }
 
 /** isMixedNum determines if a number inputted is a mixed number or not
-Parameters:
-    - num is the number to be checked
-Returns:
-    - is a boolean indicating whether it is a mixed number or not */
+ @param num is the string to be checked
+ @return a boolean indicating whether it is a mixed number or not */
 bool isMixedNum(char* num) {
     
 	if (num[0] == '-') {
@@ -253,8 +296,8 @@ bool isMixedNum(char* num) {
         if (num[i] == '\0')
             return false;
         if (num[i] == ' ')
-            i++;
-        if (num[i+1] == '\0' || num[i] == '\0'){
+            num++;
+        if (num[i+1] == '\0'){
             gotDenom = true;
             strncat(denom, num, 1);
             return true;
