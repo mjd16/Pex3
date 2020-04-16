@@ -18,10 +18,15 @@
  @return the result of the equation*/
 char* doAllMath(char* str);
 
+/**isFrac is a simple function to determine if a string is a fraction
+ @param str is the string to be tested
+ @return whether or not it is a fraction*/
+bool isFrac(char* str);
+
 /** bigMath() - handles mathematical operations based on input
- * @param num1 and num 2 are the doubles to be operated on
- * @return the double value of the result */
-double bigMath(double num1, double num2, char operation);
+ * @param num1 and num 2 are the int to be operated on
+ * @return the int value of the result */
+int bigMath(int num1, int num2, char operation);
 
 /** bigMathTwoFrac() handles mathematical operations for two fractions
 * @param num1 and num3 are the numerators of the fractions and 2/4 are denominators

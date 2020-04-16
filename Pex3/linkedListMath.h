@@ -13,25 +13,25 @@
 #include <stdbool.h>
 
 // Define a node of the linked list
-typedef struct node {
-    bool isMixed;
+typedef struct nodeMath {
     char* data;
-    struct node* next;
-} Node;
+    struct nodeMath* next;
+} NodeMath;
 
 // Define the type (meta-data) that manages the linked list of nodes
-typedef struct LinkedList{
-    Node* head;
-    Node* tail;
+typedef struct LinkedListMath{
+    NodeMath* head;
+    NodeMath* tail;
     int numberOfElements;
-} LinkedList;
+} LinkedListMath;
 
 // Functions that manipulate a linked list
-LinkedList* createLinkedList(void);
-Node* initializeNode(char* newData, bool isMixed);
-void deleteLinkedList(LinkedList* list);
-void appendElementLinkedList(LinkedList* list, char* number, bool isMixed);
-int lengthOfLinkedList(LinkedList* list);
-void deleteElementLinkedList(LinkedList* list, int position);
+LinkedListMath* createLinkedListMath(void);
+NodeMath* initializeNodeMath(char* newData);
+void deleteLinkedListMath(LinkedListMath* list);
+void appendElementLinkedListMath(LinkedListMath* list, char* number);
+char* getElementLinkedListMath(LinkedListMath* list, int position);
+int lengthOfLinkedListMath(LinkedListMath* list);
+void deleteElementLinkedListMath(LinkedListMath* list, int position);
 
 #endif /* linkedListMath_h */

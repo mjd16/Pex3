@@ -12,19 +12,141 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "PEX3_mathematicalFunctions.h"
+#include "stackMath.h"
+#include "PEX3Shunting.h"
 
 /** doAllMath will take an entire postix equation and return the answer
  @param str is the postfix string
  @return the result of the equation*/
-char* doAllMath(char* str);
+char* doAllMath(char* str){
+    char token[22];
+    char arg1[22] = "";
+    char arg2[22] = "";
+    
+    StackMath* stack = stackMathInit();
+    char* result = NULL;
 
+    
+    while(str[0] != '\0'){
+        
+        strcpy(token, getToken(str));
+        str = str + strlen(token) + 1;
+        
+        if (isMixedNum(token)){
+            stackMathPush(stack, convertMixedToFraction(token));
+        }
+        else if(isNum(token)){
+            stackMathPush(stack, token);
+        }
+        else if (isCharOp(token[0])){
+            strcpy(arg2, stackMathPop(stack));
+            strcpy(arg1, stackMathPop(stack));
+                        
+            //if the first argument is a fraction
+            if (isFrac(arg1)){
+                char numer1[22];
+                char denom1[22];
+                //get first numbers numerator and denominator
+                int i = 0;
+                while (arg1[i] != ' '){
+                    strcat(numer1, &arg1[i]);
+                    i++;
+                }
+                //getting to the next number
+                int c = -1;
+                while(!isdigit(arg2[c+1])){
+                    c++;
+                }
+                
+                while(arg1[c] != '\0'){
+                    strcat(denom1, &arg1[i]);
+                    i++;
+                }
+                //and the second number is also a fraction... get the second numerator and denominator
+                if (isFrac(arg2)){
+                    char numer2[22];
+                    char denom2[22];
+
+                    int i = 0;
+                    while (arg2[i] != ' '){
+                        strcat(numer1, &arg2[i]);
+                        i++;
+                    }
+                    //getting to the next number
+                    int c = -1;
+                    while(!isdigit(arg2[c+1])){
+                        c++;
+                    }
+                    
+                    while(arg2[c] != '\0'){
+                        strcat(denom1, &arg1[i]);
+                        c++;
+                    }
+                    result = bigMathTwoFrac(atoi(numer1),atoi(denom1),atoi(numer2),atoi(denom2),token[0]);
+                }
+                else if (!isFrac(arg2)){
+                    int num = atoi(arg2);
+                    result = bigMathOneFracFracFirst(atoi(numer1),atoi(denom1),num,token[0]);
+                }
+            }// end of first number is a fraction
+            
+            //if the first argument is a number
+            else if (!isFrac(arg1)){
+                int number = atoi(arg1);
+                
+                //if the second number is a fraction
+                if (isFrac(arg2)){
+                    char numer1[22];
+                    char denom1[22];
+                    
+                    int i = 0;
+                    while (arg2[i] != ' '){
+                        strcat(numer1, &arg2[i]);
+                        i++;
+                    }
+                    //getting to the next number
+                    int c = -1;
+                    while(!isdigit(arg2[c+1])){
+                        c++;
+                    }
+                    
+                    while(arg2[c] != '\0'){
+                        strcat(denom1, &arg1[i]);
+                        i++;
+                    }
+                    result = bigMathOneFracWholeFirst(atoi(numer1), atoi(denom1), number, token[0]);
+                }
+                else if (!isFrac(arg2)){
+                    int number2 = atoi(arg2);
+                    sprintf(result,"%d", bigMath(number, number2, token[0]));
+                }
+            } //end of first argument is a number
+            stackMathPush(stack, result);
+        }//end of if char is opp
+    }
+    return result;
+}
+
+/**isFrac is a simple function to determine if a string is a fraction
+ @param str is the string to be tested
+ @return whether or not it is a fraction*/
+bool isFrac(char* str){
+    int i = 0;
+    while (str[i] != '\0'){
+        if (str[i] == '/')
+            return true;
+        i++;
+    }
+    return false;
+}
 
  /** bigMath() - handles mathematical operations based on input
   * @param num1 and num 2 are the doubles to be operated on
   * @return the double value of the result */
-double bigMath(double num1, double num2, char operation) {
+int bigMath(int num1, int num2, char operation) {
 	switch (operation) {
 	case '+':
 		return num1 + num2;

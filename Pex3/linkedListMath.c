@@ -7,14 +7,13 @@
 //
 
 #include "linkedListMath.h"
-
 #include <stdio.h>
 #include "listAsLinkedList.h"
 #include <stdlib.h>
 
 
-LinkedList* createLinkedList() {
-    LinkedList* list;
+LinkedListMath* createLinkedListMath() {
+    LinkedListMath* list;
     list = malloc(sizeof(LinkedList));
     list->head = NULL;
     list->tail = NULL;
@@ -22,21 +21,20 @@ LinkedList* createLinkedList() {
     return list;
 }
 
-Node* initializeNode(char* newData, bool isMixed) {
-    Node* newNode;
+NodeMath* initializeNodeMath(char* newData) {
+    NodeMath* newNode;
     newNode = malloc(sizeof(Node));
     newNode->data = newData;
-    newNode->isMixed = isMixed;
     newNode->next = NULL;
     
     return newNode;
 }
 
-void deleteLinkedList(LinkedList* list) {
+void deleteLinkedListMath(LinkedListMath* list) {
     if (list->head == NULL)
         return;
-    Node* tempPtr = list->head;
-    Node* freePtr = NULL;
+    NodeMath* tempPtr = list->head;
+    NodeMath* freePtr = NULL;
     while (tempPtr != NULL) {
         freePtr = tempPtr;
         tempPtr = tempPtr->next;
@@ -45,9 +43,9 @@ void deleteLinkedList(LinkedList* list) {
     free(list);
 }
 
-void appendElementLinkedList(LinkedList* list, char* number, bool isMixed) {
-    Node* temp = malloc(sizeof(Node));
-    temp = initializeNode(number, isMixed);
+void appendElementLinkedListMath(LinkedListMath* list, char* number) {
+    NodeMath* temp = malloc(sizeof(Node));
+    temp = initializeNodeMath(number);
     if (list->head == NULL) {
         list->head = temp;
     }
@@ -58,17 +56,35 @@ void appendElementLinkedList(LinkedList* list, char* number, bool isMixed) {
     list->numberOfElements = list->numberOfElements + 1;
 }
 
-int lengthOfLinkedList(LinkedList* list) {
+int lengthOfLinkedListMath(LinkedListMath* list) {
     return list->numberOfElements;
 }
 
-void deleteElementLinkedList(LinkedList* list, int position) {
+char* getElementLinkedListMath(LinkedListMath* list, int position) {
+    if (list->head == NULL)
+        printf("List empty");
+    else if (list->numberOfElements == 0 || list->numberOfElements < position) {
+        return "\0";
+    }
+
+    NodeMath* point = list->head;
+    int counter = 0;
+
+    while (point != NULL && counter < position) {
+        counter++;
+        point = point->next;
+    }
+    char* ret = point->data;
+    return ret;
+}
+
+void deleteElementLinkedListMath(LinkedListMath* list, int position) {
     if (list->numberOfElements == 0 || list->numberOfElements <= position) {
         printf("Error\n");        exit(0);
     }
     int curPos = 0;
-    Node* tempPtr = list->head;
-    Node* prevPtr = NULL;
+    NodeMath* tempPtr = list->head;
+    NodeMath* prevPtr = NULL;
     while (curPos < position) {
         curPos++;
         prevPtr = tempPtr;
