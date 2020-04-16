@@ -314,7 +314,7 @@ bool isMixedNum(char* num) {
 
 
 /** convertMixedToFraction takes a mixed number and returns the equivalent number in fraction form
-* @param  mixedNum is the number to convert
+* @param  num is the number to convert
 * @return  the number in equivalent fraction form*/
 char* convertMixedToFraction(char* num) {
     bool isNeg = false;

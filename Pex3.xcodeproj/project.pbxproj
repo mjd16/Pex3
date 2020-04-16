@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5061A5852448EA1000F039C6 /* linkedListMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 5061A5842448EA1000F039C6 /* linkedListMath.c */; };
 		50C309A4243E596800AB0053 /* PEX3Shunting.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C3099B243E596800AB0053 /* PEX3Shunting.c */; };
 		50C309A5243E596800AB0053 /* PEX3_Queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C3099D243E596800AB0053 /* PEX3_Queue.c */; };
 		50C309A6243E596800AB0053 /* pex3main.c in Sources */ = {isa = PBXBuildFile; fileRef = 50C3099F243E596800AB0053 /* pex3main.c */; };
@@ -28,6 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5061A5832448EA1000F039C6 /* linkedListMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = linkedListMath.h; sourceTree = "<group>"; };
+		5061A5842448EA1000F039C6 /* linkedListMath.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = linkedListMath.c; sourceTree = "<group>"; };
 		50C30991243E589200AB0053 /* Pex3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Pex3; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C3099B243E596800AB0053 /* PEX3Shunting.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEX3Shunting.c; sourceTree = "<group>"; };
 		50C3099C243E596800AB0053 /* PEX3_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEX3_queue.h; sourceTree = "<group>"; };
@@ -83,6 +86,8 @@
 				50C3099F243E596800AB0053 /* pex3main.c */,
 				50C3099B243E596800AB0053 /* PEX3Shunting.c */,
 				50C309A2243E596800AB0053 /* PEX3Shunting.h */,
+				5061A5832448EA1000F039C6 /* linkedListMath.h */,
+				5061A5842448EA1000F039C6 /* linkedListMath.c */,
 			);
 			path = Pex3;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			files = (
 				50C309AB243E6A8200AB0053 /* listAsLinkedList.c in Sources */,
 				50C309A6243E596800AB0053 /* pex3main.c in Sources */,
+				5061A5852448EA1000F039C6 /* linkedListMath.c in Sources */,
 				50C309A7243E596800AB0053 /* PEX3_mathematicalFunctions.c in Sources */,
 				50C309A5243E596800AB0053 /* PEX3_Queue.c in Sources */,
 				50C309A8243E596800AB0053 /* PEX3_Stack.c in Sources */,

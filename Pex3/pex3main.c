@@ -37,6 +37,6 @@ int main() {
 //    strcpy(output, "");
 //    retu = convertToRPN(tester,output,opStack);
 //    printf("String: %s\nGives: %s\nShould be: %s\n\n", tester, retu, "7 3 * 8 6 / +");
-    
+    free(opStack);
 	return 0;
 	}
