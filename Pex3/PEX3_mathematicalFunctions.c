@@ -16,12 +16,9 @@
 #include "PEX3_mathematicalFunctions.h"
 
 
- /**
-  bigMath() - handles mathematical operations based on input
-  - Parameters:
-    - num1 and num 2 are the doubles to be operated on
-  - returns:
-    - the double value of the result */
+ /** bigMath() - handles mathematical operations based on input
+  * @param num1 and num 2 are the doubles to be operated on
+  * @return the double value of the result */
 double bigMath(double num1, double num2, char operation) {
 	switch (operation) {
 	case '+':
@@ -40,13 +37,10 @@ double bigMath(double num1, double num2, char operation) {
 	return 1;
 }
 
-/**
- bigMathTwoFrac() - handles mathematical operations for two fractions
- - Parameters:
-   - num1 and num3 are the numerators of the fractions and 2/4 are denominators
-   - op is the character representing the operation to be done
- - returns:
-   - the double value of the result*/
+/** bigMathTwoFrac() handles mathematical operations for two fractions
+ * @param num1 and num3 are the numerators of the fractions and 2/4 are denominators
+ * @param op is the character representing the operation to be done
+ * @return the double value of the result*/
 char* bigMathTwoFrac(int num1, int num2, int num3, int num4, char op) { //nums 1 and 3 are numerators and 2 and 4 are denoms
 	char* ret;
 	int place1 = 0; //numerator of first fraction when operating
@@ -95,14 +89,11 @@ char* bigMathTwoFrac(int num1, int num2, int num3, int num4, char op) { //nums 1
 	}
 }
 
-/**
-bigMathOneFrac() - handles mathematical operations for a fraction and normal number
-- Parameters:
-  - num and denom are the numerator and denominator of the fraction and number is the normal number
-  - op is the character representing the operation to be done
-- returns:
-  - character pointer to string of the resulting fraction*/
-char* bigMathOneFrac(int num, int denom, int number, char op) {
+/**bigMathOneFracFracFirst() - handles mathematical operations for a fraction and normal number where the fraction comes first
+ * @Param num and denom are the numerator and denominator of the fraction and number is the normal number
+ * @Param op is the character representing the operation to be done
+ * @Return character pointer to string of the resulting fraction*/
+char* bigMathOneFracFracFirst(int num, int denom, int number, char op) {
 	char* ret;
 	int numerator = 0; //numerator of resulting fraction
 	int denominator = 0; //denominator of resulting fraction
@@ -194,7 +185,6 @@ Parameters:
 Returns:
     - is a boolean indicating whether it is a mixed number or not */
 bool isMixedNum(char* num) {
-
     
 	if (num[0] == '-') {
 		num++;
@@ -235,6 +225,8 @@ bool isMixedNum(char* num) {
             return false;
         i++;
     }
+    if (num[i] == '/' || num[i+1] == '/')
+        return false;
     num += i + 1;
     i = 0;
     //getting the second number
