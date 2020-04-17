@@ -98,10 +98,11 @@ int main() {
     printf("It successfully maintains a stack with integers as well as a stack with strings\n\n");
         printf("It tokenizes the input string and can determine if the token is a whole number, rational number,\nmixed number, operator and correctly traverses the input string and handles the tokens appropriately\n\n");
     
-    printf("\nWhat did I want to achieve by writing all of this?\nI wanted to demonstrate that while I did not get the calculator fully functioning,\nI did accomplish quite a bit and my failure was not because I procrastinated or did not put the time in.\nIt was because I did not adequately plan for this project.\nI never really had to before, and learning that lesson the hard way was the most valuable thing I got out of this PEX.\nIn the end, I have the pieces of the program I need but I was unable to put them all together\n\n **Set view to false at the top of main to run my roughly 1600 lines of code as they are**\n\n");
+    printf("\nWhat did I want to achieve by writing all of this?\nI wanted to demonstrate that while I did not get the calculator fully functioning,\nI did accomplish quite a bit and my failure was not because I procrastinated or did not put the time in.\nIt was because I did not adequately plan for this project.\nI never really had to before, and learning that lesson the hard way was the most valuable thing I got out of this PEX.\nIn the end, I have the pieces of the program I need but I was unable to put them all together\n\n **Set view to false at the top of main to run my roughly 1800 lines of code as they are**\n\n");
     }
     else {
     printf("If you wish to exit at any time, press enter\n");
+    printf("Please separate numbers and operators with spaces\n");
     char print[256] = "";
     char output[255] = "";
     char print1[256] = ""; //needed to get the string without the newline
