@@ -83,7 +83,7 @@ char* getElementLinkedListMath(LinkedListMath* list, int position) {
 
 void deleteElementLinkedListMath(LinkedListMath* list, int position) {
     if (list->numberOfElements == 0 || list->numberOfElements <= position) {
-        printf("Error\n");        exit(0);
+        printf("Error in deleteelemath\n");        exit(0);
     }
     int curPos = 0;
     NodeMath* tempPtr = list->head;

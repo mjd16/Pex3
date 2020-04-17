@@ -34,9 +34,9 @@ int stackPop(Stack* stack) {
 
 /** display() - outputs the stack to the console
  * @param stack - the stack */
-void displayStack(Stack stack) {
-    printLinkedList(&stack);
-}
+//void displayStack(Stack stack) {
+//    printLinkedList(&stack);
+//}
 
 
 /** stackIsEmpty() determines if stack is empty

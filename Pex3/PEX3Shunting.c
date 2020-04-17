@@ -47,7 +47,7 @@ char* convertToRPN(char* str, char* output, Stack* opStack)
         if (isMixedNum(token)){
             //strcpy(token, convertMixedToFraction(token)); choosing not to convert it now in order to detect mixed nums later
             mixed = true;
-            strcat(output, token);
+            strcat(output, convertMixedToFraction(token));
             strcat(output, " ");
         }
 

@@ -28,18 +28,11 @@ Node* initializeNode(int newData);
 void deleteLinkedList(LinkedList* list);
 void appendElementLinkedList(LinkedList* list, int element);
 int lengthOfLinkedList(LinkedList* list);
-void printLinkedList(LinkedList* list);
+
 int getElementLinkedList(LinkedList* list, int position);
-void changeElementLinkedList(LinkedList* list, int position, int newElement);
+
 
 void deleteElementLinkedList(LinkedList* list, int position);
-void insertElementLinkedList(LinkedList* list, int position, int element);
-int findElementLinkedList(LinkedList* list, int element);
 
-void selSortLinkedList(LinkedList *list);
-void insertSortLinkedList(LinkedList* list);
-
-Node* findSmallest(Node* firstNode);
-void swapData(Node* j, Node* k);
 
 #endif //USAFA_CS220_S20_STUDENT_LISTASLINKEDLIST_H

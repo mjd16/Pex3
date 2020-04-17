@@ -13,79 +13,76 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-
-
-
+#include <ctype.h>
 
 /** isMixedMath() determines if the beginning of a string is a mixed number
  @param str is the string to be tester
  @return whether or not it is a mixed num*/
 bool isMixedMath(char* str){
-    int counter = 0;
-    int i = 0;
-    while (counter < 3){
-        if (isCharOp(str[i]))
-            return false;
-        else if (str[i] == ' '){
-            counter++;
-        }
-        else if (str[i] == '\0')
-            return false;
-        i++;
+    if (str[0] == ' ')
+        str++;
+    if (!isdigit(str[0]))
+        return false;
+    
+    char first[15] = "";
+    char second[15] = "";
+    //gets the numerator
+    while (str[0] != ' ' && str[0] != '\0'){
+        strncpy(first, str,1);
+        str++;
     }
+    if (str[0] == '\0')
+        return false;
+    str++;
+    //if the character 2 after the last digit is not a division symbol, it's not a mixed num
+    //if it is, go 2 past the division symbol
+    if (str[0] != '/')
+        return false;
+    else
+        str+=2;
+    //if the symbol there is not a number, return false;
+    if(!isdigit(str[0]))
+        return false;
+    //gets the second number
+    while (str[0] != ' ' && str[0] != '\0'){
+        strncpy(second, str,1);
+        str++;
+    }
+    //if the numerator is not greater than the denominator then it isnt a mixed number
+    if (atoi(second) > atoi(first))
+        return false;
+    
     return true;
 }
 
 /** getMixedMath() is a function to get the mixed number out of the string, convert it to an improper fraction and adequately return it
  @param str is the string that it is getting the mixed num from
  @return the converted mixed number*/
-char* getMixedMath(char* str){
-    int counter = 0;
-    
+char* getMixedMath(char* str){    
     bool neg = false;
     if (str[0] == '-'){
         neg = true;
         str++;
     }
     
-    char whole[10] = "";
-    char numer[10] = "";
-    char denom[10] = "";
+    char numer[15] = "";
+    char denom[15] = "";
     
-    while (counter < 1){
-        if (str[0] != ' '){
-            strncpy(whole, str,1);
-            str++;
-        }
-        else
-            counter++;
+    while (str[0] != ' '){
+        strncat(numer,str,1);
+        str++;
     }
-    str = str + strlen(whole) + 1;
-    
-
-    while (counter < 2){
-        if (str[0] != ' '){
-            strncpy(numer, str,1);
-            str++;
-        }
-        else
-            counter++;
-    }
-    
-    while (counter < 3){
-        if (str[0] != ' '){
-            strncpy(denom, str,1);
-            str++;
-        }
-        else
-            counter++;
+    str+=3;
+    while (str[0] != '\0' && str[0] != ' ' ){
+        strncat(denom,str,1);
+        str++;
     }
 
     char* retun = malloc(sizeof(char)*30);
     if (!neg)
-        sprintf(retun, "%s %s / %s", whole, numer, denom);
+        sprintf(retun, "%s / %s", numer, denom);
     else
-        sprintf(retun, "-%s %s / %s", whole, numer, denom);
+        sprintf(retun, "-%s / %s", numer, denom);
     
     return retun;
 }

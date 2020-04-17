@@ -36,8 +36,8 @@ char* doAllMath(char* str){
         strcpy(token[i], getTokenMath(str));
         str = str + strlen(token[i]) + 1;
         
-        if (isMixedNum(token[i])){
-            stackMathPush(stack, convertMixedToFraction(token[i]));
+        if (isMixedMath(token[i])){
+            stackMathPush(stack, token[i]);
         }
         else if(isNum(token[i])){
             stackMathPush(stack, token[i]);

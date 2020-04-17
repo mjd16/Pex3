@@ -25,9 +25,9 @@ void stackPush(Stack* stack, int element);
  * @return the top of the stack if it works, -1 when it doesn't */
 int stackPop(Stack* stack);
 
-/** display() - outputs the stack to the console
- * @param stack - the stack */
-void displayStack(Stack stack);
+///** display() - outputs the stack to the console
+// * @param stack - the stack */
+//void displayStack(Stack stack);
 
 /** stackIsEmpty() determines if stack is empty
  * @param stack is a pointer to the stack
