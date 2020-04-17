@@ -1,10 +1,10 @@
-//
-//  linkedListMath.h
-//  Pex3
-//
-//  Created by Max DiLalla  on 4/16/20.
-//  Copyright © 2020 Max DiLalla . All rights reserved.
-//
+/** linkedListMath.h
+* ===========================================================
+* Name: Max Di Lalla
+* Section: T2
+* Project: PEX 3 RPN Calculator
+* ===========================================================
+*/
 
 #ifndef linkedListMath_h
 #define linkedListMath_h

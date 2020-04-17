@@ -1,10 +1,10 @@
-//
-//  linkedListMath.c
-//  Pex3
-//
-//  Created by Max DiLalla  on 4/16/20.
-//  Copyright © 2020 Max DiLalla . All rights reserved.
-//
+/** linkedListMath.c
+* ===========================================================
+* Name: Max Di Lalla
+* Section: T2
+* Project: PEX 3 RPN Calculator
+* ===========================================================
+*/
 
 #include "linkedListMath.h"
 #include <stdio.h>
@@ -70,7 +70,7 @@ char* getElementLinkedListMath(LinkedListMath* list, int position) {
     NodeMath* point = list->head;
     int counter = 0;
 
-    while (point != NULL && counter < position) {
+    while (point->data != NULL && counter < position) {
         counter++;
         point = point->next;
     }

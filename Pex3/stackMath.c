@@ -1,10 +1,10 @@
-//
-//  queueMath.c
-//  Pex3
-//
-//  Created by Max DiLalla  on 4/16/20.
-//  Copyright © 2020 Max DiLalla . All rights reserved.
-//
+/** stackMath.c
+* ===========================================================
+* Name: Max Di Lalla
+* Section: T2
+* Project: PEX 3 RPN Calculator
+* ===========================================================
+*/
 
 #include "stackMath.h"
 

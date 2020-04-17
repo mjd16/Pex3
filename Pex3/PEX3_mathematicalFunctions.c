@@ -27,7 +27,7 @@ char* doAllMath(char* str){
     char arg2[22] = "";
     
     StackMath* stack = stackMathInit();
-    char* result = NULL;
+    char* result = malloc(sizeof(char)*255);
 
     int i = 0;
     while(str[0] != '\0'){
@@ -121,13 +121,15 @@ char* doAllMath(char* str){
                 }
                 else if (!isFrac(arg2)){
                     int number2 = atoi(arg2);
-                    sprintf(result,"%d", bigMath(number, number2, token[i][0]));
+                    char op = token[i][0];
+                    sprintf(result,"%d", bigMath(number, number2, op));
                 }
             } //end of first argument is a number
             stackMathPush(stack, result);
         }//end of if char is opp
         i++;
     }
+    free(stack);
     return result;
 }
 
