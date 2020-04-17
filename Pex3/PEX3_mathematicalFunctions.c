@@ -32,7 +32,7 @@ char* doAllMath(char* str){
     int i = 0;
     while(str[0] != '\0'){
         
-        strcpy(token[i], getToken(str));
+        strcpy(token[i], getTokenMath(str));
         str = str + strlen(token[i]) + 1;
         
         if (isMixedNum(token[i])){
@@ -133,6 +133,12 @@ char* doAllMath(char* str){
     return result;
 }
 
+/** getTokenMath() is used to tokenize the rpn output
+@param str is the rpn output
+@return a token of the rpn string*/
+char* getTokenMath(char* str){
+    return "";
+}
 /**isFrac is a simple function to determine if a string is a fraction
  @param str is the string to be tested
  @return whether or not it is a fraction*/
@@ -528,6 +534,13 @@ bool isRational(char* str){
 @param str is the token to be converted
 @return the converted string*/
 char* convertRationalToFrac(char* str){
+    bool isNeg = false;
+    if (str[0] == '-'){
+        isNeg = true;
+        str++;
+        
+    }
+    
     int counter = 0;
     char wholeNum[22] = "";
     char dec[22] = "";
@@ -550,8 +563,9 @@ char* convertRationalToFrac(char* str){
     int denom = (int)pow(10,counter) - 1;
     int numer = atoi(dec) + whole * denom;
     
-    
-    char* retun = convertImpropToMixed(numer, denom);
+    char* retun = convertImpropToMixed(numer,denom);
+    if (isNeg)
+       retun = convertImpropToMixed(-1 * numer, denom);
     
     return retun;
 }
@@ -560,13 +574,20 @@ char* convertRationalToFrac(char* str){
 @param numer and denom are the numerator and denominator
 @return the converted mixed number*/
 char* convertImpropToMixed(int numer, int denom){
+    bool neg = false;
+    if (numer < 0){
+        neg = true;
+        numer = numer * -1;
+    }
     int counter = 0;
     while (numer > denom){
         numer = numer - denom;
         counter++;
     }
     char *out = malloc(sizeof(char)*30);
-    sprintf(out, "%d %d / %d", counter, numer, denom);
-    
+    if (!neg)
+        sprintf(out, "%d %d / %d", counter, numer, denom);
+    else
+        sprintf(out, "-%d %d / %d", counter, numer, denom);
     return out;
 }

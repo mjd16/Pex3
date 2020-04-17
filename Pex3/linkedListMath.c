@@ -70,7 +70,7 @@ char* getElementLinkedListMath(LinkedListMath* list, int position) {
     NodeMath* point = list->head;
     int counter = 0;
 
-    while (point->data != NULL && counter < position) {
+    while (point != NULL && counter < position) {
         counter++;
         point = point->next;
     }
