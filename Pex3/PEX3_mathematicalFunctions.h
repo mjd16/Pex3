@@ -66,6 +66,19 @@ bool isMixedNum(char* num);
 * @return  the number in equivalent fraction form*/
 char* convertMixedToFraction(char* mixedNum);
 
+/** isRational() checks if a token is a rational number
+ @param str is the token to be checked
+ @return true if it is a rational, false otherwise*/
+bool isRational(char* str);
 
+/** convertRationalToFrac() takes a rational and converts it to a fraction
+@param str is the token to be converted
+@return the converted string*/
+char* convertRationalToFrac(char* str);
+
+/** convertImpropToMixed() converts an improper fraction to a mixed number
+ @param numer and denom are the numerator and denominator
+ @return the converted mixed number*/
+char* convertImpropToMixed(int numer, int denom);
 
 #endif

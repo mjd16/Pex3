@@ -22,26 +22,26 @@
  @param str is the postfix string
  @return the result of the equation*/
 char* doAllMath(char* str){
-    char token[22];
+    char token[22][22];
     char arg1[22] = "";
     char arg2[22] = "";
     
     StackMath* stack = stackMathInit();
     char* result = NULL;
 
-    
+    int i = 0;
     while(str[0] != '\0'){
         
-        strcpy(token, getToken(str));
-        str = str + strlen(token) + 1;
+        strcpy(token[i], getToken(str));
+        str = str + strlen(token[i]) + 1;
         
-        if (isMixedNum(token)){
-            stackMathPush(stack, convertMixedToFraction(token));
+        if (isMixedNum(token[i])){
+            stackMathPush(stack, convertMixedToFraction(token[i]));
         }
-        else if(isNum(token)){
-            stackMathPush(stack, token);
+        else if(isNum(token[i])){
+            stackMathPush(stack, token[i]);
         }
-        else if (isCharOp(token[0])){
+        else if (isCharOp(token[i][0])){
             strcpy(arg2, stackMathPop(stack));
             strcpy(arg1, stackMathPop(stack));
                         
@@ -85,11 +85,11 @@ char* doAllMath(char* str){
                         strcat(denom1, &arg1[i]);
                         c++;
                     }
-                    result = bigMathTwoFrac(atoi(numer1),atoi(denom1),atoi(numer2),atoi(denom2),token[0]);
+                    result = bigMathTwoFrac(atoi(numer1),atoi(denom1),atoi(numer2),atoi(denom2),token[i][0]);
                 }
                 else if (!isFrac(arg2)){
                     int num = atoi(arg2);
-                    result = bigMathOneFracFracFirst(atoi(numer1),atoi(denom1),num,token[0]);
+                    result = bigMathOneFracFracFirst(atoi(numer1),atoi(denom1),num,token[i][0]);
                 }
             }// end of first number is a fraction
             
@@ -117,15 +117,16 @@ char* doAllMath(char* str){
                         strcat(denom1, &arg1[i]);
                         i++;
                     }
-                    result = bigMathOneFracWholeFirst(atoi(numer1), atoi(denom1), number, token[0]);
+                    result = bigMathOneFracWholeFirst(atoi(numer1), atoi(denom1), number, token[i][0]);
                 }
                 else if (!isFrac(arg2)){
                     int number2 = atoi(arg2);
-                    sprintf(result,"%d", bigMath(number, number2, token[0]));
+                    sprintf(result,"%d", bigMath(number, number2, token[i][0]));
                 }
             } //end of first argument is a number
             stackMathPush(stack, result);
         }//end of if char is opp
+        i++;
     }
     return result;
 }
@@ -506,4 +507,64 @@ char* convertMixedToFraction(char* num) {
         numerator = numerator * -1;
     char* output = reduceFrac(numerator,denominator);
     return output;
+}
+
+/** isRational() checks if a token is a rational number
+@param str is the token to be checked
+@return true if it is a rational, false otherwise*/
+bool isRational(char* str){
+    int i = 0;
+    while (str[i] != '\0'){
+        if (str[i] == '.')
+            return true;
+        i++;
+    }
+    return false;
+}
+
+/** convertRationalToFrac() takes a rational and converts it to a fraction
+@param str is the token to be converted
+@return the converted string*/
+char* convertRationalToFrac(char* str){
+    int counter = 0;
+    char wholeNum[22] = "";
+    char dec[22] = "";
+    
+    int i = 0;
+    while (str[i] != '.'){
+        wholeNum[i] = str[i];
+        i++;
+    }
+    i++;
+    int c = 0;
+    while (str[i] != '\0'){
+        dec[c] = str[i];
+        i++;
+        c++;
+    }
+    
+    int whole = atoi(wholeNum);
+    counter = (int)strlen(dec);
+    int denom = (int)pow(10,counter) - 1;
+    int numer = atoi(dec) + whole * denom;
+    
+    
+    char* retun = convertImpropToMixed(numer, denom);
+    
+    return retun;
+}
+
+/** convertImpropToMixed() converts an improper fraction to a mixed number
+@param numer and denom are the numerator and denominator
+@return the converted mixed number*/
+char* convertImpropToMixed(int numer, int denom){
+    int counter = 0;
+    while (numer > denom){
+        numer = numer - denom;
+        counter++;
+    }
+    char *out = malloc(sizeof(char)*30);
+    sprintf(out, "%d %d / %d", counter, numer, denom);
+    
+    return out;
 }

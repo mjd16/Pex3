@@ -33,26 +33,14 @@ int main() {
     
     
     
-    char tester[35] = "3 + 4";
+    char tester[35] = "3 + 1.28";
     char* retu = convertToRPN(tester, output, opStack);
-    printf("String: %s\nGives: %s\nShould be: %s\n\n", tester, retu, "3 4 +");
-    printf("Result is: %s \nShould be: 7", doAllMath(retu));
-//
-//    //thorough testing of output conversion
-//    strcpy(tester, "3 + 4 * 8");
-//    strcpy(output, "");
-//    retu = convertToRPN(tester,output,opStack);
-//    printf("String: %s\nGives: %s\nShould be: %s\n\n", tester, retu, "3 4 8 * +");
-//
-//    strcpy(tester, "4 ^ 2 1 / 3");
-//    strcpy(output, "");
-//    retu = convertToRPN(tester,output,opStack);
-//    printf("String: %s\nGives: %s\nShould be: %s\n\n", tester, retu, "4 2 1 / 3 ^");
-//
-//    strcpy(tester, "7 * 3 + ( 8 / 6 )");
-//    strcpy(output, "");
-//    retu = convertToRPN(tester,output,opStack);
-//    printf("String: %s\nGives: %s\nShould be: %s\n\n", tester, retu, "7 3 * 8 6 / +");
+    printf("String: %s\nGives: %s\nShould be: %s\n\n", tester, retu, "3 1 28 / 99 +");
+    //printf("Result is: %s \nShould be: 7", doAllMath(retu));
+
+//    char tester[35] = "1.28";
+//    printf("%s\n", convertRationalToFrac(tester));
+    
     free(opStack);
     //free(print);
 	return 0;

@@ -41,6 +41,9 @@ char* convertToRPN(char* str, char* output, Stack* opStack)
         bool mixed = false;
         
         //if its a mixed num, push it to output and get the next token
+        if(isRational(token)){
+            strcpy(token, convertRationalToFrac(token));
+        }
         if (isMixedNum(token)){
             //strcpy(token, convertMixedToFraction(token)); choosing not to convert it now in order to detect mixed nums later
             mixed = true;
