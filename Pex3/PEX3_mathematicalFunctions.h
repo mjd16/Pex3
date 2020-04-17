@@ -18,11 +18,6 @@
  @return the result of the equation*/
 char* doAllMath(char* str);
 
-/** getTokenMath() is used to tokenize the rpn output
- @param str is the rpn output
- @return a token of the rpn string*/
-char* getTokenMath(char* str);
-
 /**isFrac is a simple function to determine if a string is a fraction
  @param str is the string to be tested
  @return whether or not it is a fraction*/

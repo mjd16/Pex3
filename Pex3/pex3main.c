@@ -12,6 +12,7 @@
 #include "PEX3_Stack.h"
 #include "listAsLinkedList.h"
 #include "linkedListMath.h"
+#include "tokenizeRPN.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -104,24 +105,27 @@ int main() {
     char print[256] = "";
     char output[255] = "";
     char print1[256] = ""; //needed to get the string without the newline
-
-    do {
-        printf("Enter your equation:\n");
-        fgets(print, 256, stdin);
-        Stack* opStack = stackInit();
-        if (print[0] == '\n')
-            break;
-        strcpy(print1, strtok(print, "\n"));
-        strcpy(print1, convertToRPN(print1, output, opStack));
-        printf("Your function in RPN notation is: %s", print1);
-        printf("\n");
-        strcpy(print1, doAllMath(print1));
-        printf("The result of your function is: %s\n\n", print1);
-        strcpy(print1, "");
-        strcpy(output, "");
+    Stack* opStack = stackInit();
+        
+        do {
+            printf("Enter your equation:\n");
+            fgets(print, 256, stdin);
+            if (print[0] == '\n')
+                break;
+            strcpy(print1, strtok(print, "\n"));
+            strcpy(print1, convertToRPN(print1, output, opStack));
+            printf("Your function in RPN notation is: %s", print1);
+            printf("\n");
+            strcpy(print1, doAllMath(print1));
+            printf("The result of your function is: %s\n\n", print1);
+            strcpy(print1, "");
+            strcpy(output, "");
+        } while (print[0] != '\n');
+        free(print1);
+        free(print);
         free(opStack);
-    } while (print[0] != '\n');
     }
+    
     
 	return 0;
 	}

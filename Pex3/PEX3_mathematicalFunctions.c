@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "PEX3_mathematicalFunctions.h"
+#include "tokenizeRPN.h"
 #include "stackMath.h"
 #include "PEX3Shunting.h"
 
@@ -133,12 +134,6 @@ char* doAllMath(char* str){
     return result;
 }
 
-/** getTokenMath() is used to tokenize the rpn output
-@param str is the rpn output
-@return a token of the rpn string*/
-char* getTokenMath(char* str){
-    return "";
-}
 /**isFrac is a simple function to determine if a string is a fraction
  @param str is the string to be tested
  @return whether or not it is a fraction*/

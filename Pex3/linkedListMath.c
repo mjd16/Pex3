@@ -61,6 +61,10 @@ int lengthOfLinkedListMath(LinkedListMath* list) {
 }
 
 char* getElementLinkedListMath(LinkedListMath* list, int position) {
+    if (position < 0){
+        printf("Error Here");
+        return "ERRR";
+    }
     if (list->head == NULL)
         printf("List empty");
     else if (list->numberOfElements == 0 || list->numberOfElements < position) {
