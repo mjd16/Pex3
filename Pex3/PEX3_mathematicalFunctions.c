@@ -28,7 +28,7 @@ char* doAllMath(char* str){
     char arg2[22] = "";
     
     StackMath* stack = stackMathInit();
-    char* result = malloc(sizeof(char)*255);
+    char result[255] = "";
 
     int i = 0;
     while(str[0] != '\0'){
@@ -48,50 +48,48 @@ char* doAllMath(char* str){
                         
             //if the first argument is a fraction
             if (isFrac(arg1)){
-                char numer1[22];
-                char denom1[22];
+                char numer1[22] = "";
+                char denom1[22] = "";
                 //get first numbers numerator and denominator
-                int i = 0;
-                while (arg1[i] != ' '){
-                    strcat(numer1, &arg1[i]);
-                    i++;
+                int j = 0;
+                while (arg1[j] != ' '){
+                    numer1[j] = arg1[j];
+                    j++;
                 }
                 //getting to the next number
-                int c = -1;
-                while(!isdigit(arg2[c+1])){
-                    c++;
-                }
+                int c = (int)strlen(numer1) + 3;
                 
+                int q = 0;
                 while(arg1[c] != '\0'){
-                    strcat(denom1, &arg1[i]);
-                    i++;
+                    denom1[q] = arg1[c];
+                    c++;
+                    q++;
                 }
                 //and the second number is also a fraction... get the second numerator and denominator
                 if (isFrac(arg2)){
                     char numer2[22];
                     char denom2[22];
 
-                    int i = 0;
-                    while (arg2[i] != ' '){
-                        strcat(numer1, &arg2[i]);
-                        i++;
+                    int j = 0;
+                    while (arg2[j] != ' '){
+                        numer2[j] = arg2[j];
+                        j++;
                     }
                     //getting to the next number
-                    int c = -1;
-                    while(!isdigit(arg2[c+1])){
-                        c++;
-                    }
+                    int c = (int)strlen(numer2)+3;
                     
+                    int q = 0;
                     while(arg2[c] != '\0'){
-                        strcat(denom1, &arg1[i]);
+                        denom2[q] = arg2[c];
                         c++;
+                        q++;
                     }
-                    result = bigMathTwoFrac(atoi(numer1),atoi(denom1),atoi(numer2),atoi(denom2),token[i][0]);
-                }
+                    strcpy(result, bigMathTwoFrac(atoi(numer1),atoi(denom1),atoi(numer2),atoi(denom2),token[i][0]));
+                } //end of second number also fraction (first is a fraction)
                 else if (!isFrac(arg2)){
                     int num = atoi(arg2);
-                    result = bigMathOneFracFracFirst(atoi(numer1),atoi(denom1),num,token[i][0]);
-                }
+                    strcpy(result, bigMathOneFracFracFirst(atoi(numer1),atoi(denom1),num,token[i][0]));
+                } // end of second number whole and first fraction
             }// end of first number is a fraction
             
             //if the first argument is a number
@@ -100,38 +98,41 @@ char* doAllMath(char* str){
                 
                 //if the second number is a fraction
                 if (isFrac(arg2)){
-                    char numer1[22];
-                    char denom1[22];
+                    char numer1[22] = "";
+                    char denom1[22] = "";
                     
-                    int i = 0;
-                    while (arg2[i] != ' '){
-                        strcat(numer1, &arg2[i]);
-                        i++;
+                    int j = 0;
+                    while (arg2[j] != ' '){
+                        numer1[j] = arg2[j];
+                        j++;
                     }
                     //getting to the next number
-                    int c = -1;
-                    while(!isdigit(arg2[c+1])){
-                        c++;
-                    }
+                    int c = (int)strlen(numer1) + 3;
                     
+                    int q = 0;
                     while(arg2[c] != '\0'){
-                        strcat(denom1, &arg1[i]);
-                        i++;
+                        denom1[q] = arg2[c];
+                        c++;
+                        q++;
                     }
-                    result = bigMathOneFracWholeFirst(atoi(numer1), atoi(denom1), number, token[i][0]);
+                    strcpy(result, bigMathOneFracWholeFirst(atoi(numer1), atoi(denom1), number, token[i][0]));
                 }
-                else if (!isFrac(arg2)){
+                else if (!isFrac(arg2) && !isFrac(arg1)){
                     int number2 = atoi(arg2);
                     char op = token[i][0];
-                    sprintf(result,"%d", bigMath(number, number2, op));
+                    strcpy(result, bigMath(number, number2, op));
                 }
             } //end of first argument is a number
+            
             stackMathPush(stack, result);
         }//end of if char is opp
         i++;
     }
+    stackMathPop(stack);
     free(stack);
-    return result;
+    char *retun = malloc(sizeof(char)*255);
+    strcpy(retun, result);
+    return retun;
 }
 
 /**isFrac is a simple function to determine if a string is a fraction
@@ -150,22 +151,28 @@ bool isFrac(char* str){
  /** bigMath() - handles mathematical operations based on input
   * @param num1 and num 2 are the doubles to be operated on
   * @return the double value of the result */
-int bigMath(int num1, int num2, char operation) {
+char* bigMath(int num1, int num2, char operation) {
+    char* ret = malloc(sizeof(char)*35);
 	switch (operation) {
 	case '+':
-		return num1 + num2;
+            sprintf(ret, "%d", num1 + num2);
+                return ret;
 	case '-':
-		return num1 - num2;
+            sprintf(ret, "%d", num1 - num2);
+                return ret;
 	case '*':
-		return num1 * num2;
+            sprintf(ret, "%d", num1 * num2);
+                return ret;
 	case '/':
-		return num1 / num2;
+            sprintf(ret, "%d / %d", num1, num2);
+                return ret;
 	case '^':
-		return pow(num1, num2);
+            sprintf(ret, "%d", (int)pow(num1, num2));
+                return ret;
 	default:
-		return 1;
+		return "WRONG AT BIGMATH";
 	}
-	return 1;
+	return ret;
 }
 
 /** bigMathTwoFrac() handles mathematical operations for two fractions
@@ -173,8 +180,8 @@ int bigMath(int num1, int num2, char operation) {
  * @param op is the character representing the operation to be done
  * @return the double value of the result*/
 char* bigMathTwoFrac(int num1, int num2, int num3, int num4, char op) { //nums 1 and 3 are numerators and 2 and 4 are denoms
-	char* ret;
-	int place1 = 0; //numerator of first fraction when operating
+    char* ret = malloc(sizeof(char) * 30);
+    int place1 = 0; //numerator of first fraction when operating
 	int place2 = 0; //numerator of second fraction when operating
 	int numerator = 0; //numerator of resulting fraction
 	int denominator = 0; //denominator of resulting fraction
@@ -225,11 +232,10 @@ char* bigMathTwoFrac(int num1, int num2, int num3, int num4, char op) { //nums 1
  * @Param op is the character representing the operation to be done
  * @Return character pointer to string of the resulting fraction*/
 char* bigMathOneFracFracFirst(int num, int denom, int number, char op) {
-	char* ret;
-	int numerator = 0; //numerator of resulting fraction
+	char* ret = malloc(sizeof(char) * 30);
+    int numerator = 0; //numerator of resulting fraction
 	int denominator = 0; //denominator of resulting fraction
 	int place1 = 0;
-    double base = 0.0;
     double ans = 0.0;
 	switch (op) {
 	case '+':
@@ -255,12 +261,9 @@ char* bigMathOneFracFracFirst(int num, int denom, int number, char op) {
 		ret = reduceFrac(numerator, denominator);
 		return ret;
     case '^':
-        base = (double)num / denom;
-        ans = pow(base, number);
-        ret = malloc(sizeof(char)*22);
-        sprintf(ret,"%.2lf",ans);
+        ans = pow((double)num / (double)denom, number);
+        sprintf(ret, "%.3lf", ans);
         return ret;
-
 	default:
 		ret = "No result";
 		return ret;
@@ -272,11 +275,10 @@ char* bigMathOneFracFracFirst(int num, int denom, int number, char op) {
  * @Param op is the character representing the operation to be done
  * @Return character pointer to string of the resulting fraction*/
 char* bigMathOneFracWholeFirst(int num, int denom, int number, char op) {
-    char* ret;
+    char* ret = malloc(sizeof(char) * 30);
     int numerator = 0; //numerator of resulting fraction
     int denominator = 0; //denominator of resulting fraction
     int place1 = 0;
-    double exp = 0.0;
     double ans = 0.0;
     switch (op) {
     case '+':
@@ -302,10 +304,8 @@ char* bigMathOneFracWholeFirst(int num, int denom, int number, char op) {
         ret = reduceFrac(numerator, denominator);
         return ret;
     case '^':
-        exp = (double)num / denom;
-        ans = pow(number, exp);
-        ret = malloc(sizeof(char)*22);
-        sprintf(ret,"%.2lf",ans);
+        ans = pow((double)num / (double)denom, number);
+        sprintf(ret, "%.3lf", ans);
         return ret;
 
     default:
@@ -323,17 +323,23 @@ char* reduceFrac(int numer, int denom) {
 	int greatDenom = gcd(abs(numer), abs(denom));
 	num1 = numer / greatDenom;
 	num2 = denom / greatDenom;
-	char ret[22] = "nothing";
-	if (strcmp(ret, "\0")) {
-		sprintf(ret, "%d", num1);
-		strcat(ret, " / ");
+	char ret1[22] = "nothing";
+	if (strcmp(ret1, "\0")) {
+		sprintf(ret1, "%d", num1);
+		strcat(ret1, " / ");
 	}
 	char ret2[22] = "nothing";
 	if (strcmp(ret2, "\0")) {
 		sprintf(ret2, "%d", num2);
 	}
-	strcat(ret, ret2);
-    char* retu = ret;
+    char *retu = malloc(sizeof(char) * 20);
+    if (num2 != 1){
+        strcat(ret1, ret2);
+        retu = ret1;
+    }
+    else
+        sprintf(retu, "%d", num1);
+    
 	return retu;
 }
 
@@ -360,7 +366,10 @@ bool isMixedNum(char* num) {
 	}
     
     int c = 0;
-    while (num[c] != '\0'){
+    int spaces = 0;
+    while (num[c] != '\0' && spaces < 4){
+        if(num[c] == ' ')
+            spaces++;
         if (strchr("*+-^", num[c]))
             return false;
         c++;
@@ -423,7 +432,7 @@ bool isMixedNum(char* num) {
             return false;
         if (num[i] == ' ')
             num++;
-        if (num[i+1] == '\0'){
+        if (num[i+1] == '\0' || num[i+1] == ' '){
             gotDenom = true;
             strncat(denom, num, 1);
             return true;

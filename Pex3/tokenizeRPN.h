@@ -1,10 +1,10 @@
-//
-//  tokenizeRPN.h
-//  Pex3
-//
-//  Created by Max DiLalla  on 4/17/20.
-//  Copyright © 2020 Max DiLalla . All rights reserved.
-//
+/** tokenizeRPN.h
+* ===========================================================
+* Name: Max Di Lalla
+* Section: T2
+* Project: PEX 3 RPN Calculator
+* ===========================================================
+*/
 
 #ifndef tokenizeRPN_h
 #define tokenizeRPN_h

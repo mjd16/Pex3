@@ -1,10 +1,10 @@
-//
-//  tokenizeRPN.c
-//  Pex3
-//
-//  Created by Max DiLalla  on 4/17/20.
-//  Copyright © 2020 Max DiLalla . All rights reserved.
-//
+/** tokenizeRPN.c
+* ===========================================================
+* Name: Max Di Lalla
+* Section: T2
+* Project: PEX 3 RPN Calculator
+* ===========================================================
+*/
 
 #include "tokenizeRPN.h"
 #include "PEX3Shunting.h"
@@ -19,7 +19,7 @@
  @param str is the string to be tester
  @return whether or not it is a mixed num*/
 bool isMixedMath(char* str){
-    if (str[0] == ' ')
+    if (str[0] == ' ' || str[0] == '-')
         str++;
     if (!isdigit(str[0]))
         return false;
@@ -28,7 +28,7 @@ bool isMixedMath(char* str){
     char second[15] = "";
     //gets the numerator
     while (str[0] != ' ' && str[0] != '\0'){
-        strncpy(first, str,1);
+        strncat(first, str,1);
         str++;
     }
     if (str[0] == '\0')
@@ -45,7 +45,7 @@ bool isMixedMath(char* str){
         return false;
     //gets the second number
     while (str[0] != ' ' && str[0] != '\0'){
-        strncpy(second, str,1);
+        strncat(second, str,1);
         str++;
     }
     //if the numerator is not greater than the denominator then it isnt a mixed number
@@ -93,13 +93,26 @@ char* getMixedMath(char* str){
 char* getTokenMath(char* str){
 
     char *output = malloc(sizeof(char)*30);
-    
+   
     if (isMixedMath(str)){
         output = getMixedMath(str);
         return output;
     }else if (isCharOp(str[0])){
-        strncpy(output, str, 1);
-        return output;
+        
+        if (isCharOp(str[0]) && str[0] != '-'){
+            strncpy(output, str, 1);
+            return output;
+        }
+        else if (isdigit(str[1])){
+            while (str[0] != ' ' && str[0] != '\0'){
+            strncat(output, str, 1);
+            str++;
+            }
+        }
+        else if (str[0] == '-' && !isdigit(str[1])){
+            strncpy(output, str, 1);
+            return output;
+        }
     }
     else if(isNum(str)){
         while (str[0] != ' ' && str[0] != '\0'){

@@ -19,96 +19,18 @@
 
 int main() {
     
-    bool view = false;
-    if (view) {
-    printf("Welcome to the RPN Calculator that took roughly 60 hours because I went in with a poor stratgey\n\n");
-    printf("Upon testing my work you will find a lot of errors. \nYou will find that there are issues with integer rounding\nand problems doing subtraction because a lot of my functions omit the - do deal with negative numbers. \nThen after a few tests it will throw an exception because the pushing to the stack did not work due to\nthe minus signs completely messing up my program.\n\nIn seeing this you will probably think I just put half effort into this PEX\nThat is very far from the truth.\nI put way too much energy into it.\nI did not learn from my dad or Abraham Lincoln who said:\nif you have 3 hours to chop down a tree then spend 2 sharpening the axe\nI did not plan out my work and as a result I did it incredibly inefficiently.\n\nMy program needs two different stack libraries, multiple different conversion functions\nand converts everything to an RPN string then takes the string and\ntries to do math with it instead of pushing everything to an output queue in the first place.\nRather than focus on what it cannot do, I chose to focus on what it can do and demonstrate all of the capabilities it has below.\n");
-    
-    printf("\nMy project can take pretty much any string I can think of and turn it into rpn:\n\n");
-        Stack* opStack = stackInit();
-        char* output = malloc(sizeof(char)*100);
-        char test1[100] = "3 + 4 * 8";
-        output = convertToRPN(test1, output, opStack);
-        printf("3 + 4 * 8 in RPN is: %s\n\n", output);
-        
-        strcpy(output, "");
-        strcpy(test1, "3 / 6 + 8");
-        output = convertToRPN(test1, output, opStack);
-        printf("3 / 6 + 8 in RPN is: %s\n\n", output);
-
-        strcpy(output, "");
-        strcpy(test1, "2 6 / 4 + 8");
-        output = convertToRPN(test1, output, opStack);
-        printf("2 6 / 4 + 8 in RPN is: %s\n\n", output);
-
-        strcpy(output, "");
-        strcpy(test1, "3 + 1.28");
-        output = convertToRPN(test1, output, opStack);
-        printf("3 + 1.28 in RPN is: %s\n\n", output);
-
-        strcpy(output, "");
-        strcpy(test1, "3 / 6 + 8");
-        output = convertToRPN(test1, output, opStack);
-        printf("3 / 6 + 8 in RPN is: %s\n\n", output);
-        
-        strcpy(output, "");
-        strcpy(test1, "706 * 428 / 63 + 8");
-        output = convertToRPN(test1, output, opStack);
-        printf("706 * 428 / 63 + 8 in RPN is: %s\n\n", output);
-
-    printf("It can convert mixed numbers to improper fractions and back:\n\n");
-        strcpy(output, "");
-        strcpy(test1, "-2 1 / 2");
-        output = convertMixedToFraction(test1);
-        printf("-2 3 / 6 as an improper fraction is: %s\n\n", output);
-        
-        strcpy(output, "");
-        strcpy(test1, "7 4 / 9");
-        output = convertMixedToFraction(test1);
-        printf("7 4 / 9 as an improper fraction is: %s\n\n", output);
-        
-        strcpy(output, "");
-        strcpy(test1, "-5 / 2");
-        output = convertImpropToMixed(-5, 2);
-        printf("-5 / 2 as a mixed number is: %s\n\n", output);
-        
-        strcpy(output, "");
-        strcpy(test1, "67 / 9");
-        output = convertImpropToMixed(67,9);
-        printf("67 / 9 as a mixed number is: %s\n\n", output);
-        
-    printf("It can turn rational numbers into reduced mixed numbers:\n\n");
-        
-        strcpy(output, "");
-        strcpy(test1, "1.333");
-        output = convertRationalToFrac(test1);
-        printf("1.333 as an improper fraction is: %s\n\n", output);
-        
-        strcpy(output, "");
-        strcpy(test1, "-2.48");
-        output = convertRationalToFrac(test1);
-        printf("-2.48 as an improper fraction is: %s\n\n", output);
-        
-    printf("It can determine whether or not a function is a rational number or a mixed number:\n");
-        printf("\tNo real need to show this, they needed to work in order for my rpn converter to work...\n\n");
-        
-    printf("It can do math with 2 fractions, 1 fraction and a whole number, and 2 whole numbers\n");
-    printf("\tI won't bother you with showing you it can do basic math...\n");
-    printf("However, I will concede that I never figured out how to do exponentiation with fractions\n\n");
-    printf("It successfully maintains a stack with integers as well as a stack with strings\n\n");
-        printf("It tokenizes the input string and can determine if the token is a whole number, rational number,\nmixed number, operator and correctly traverses the input string and handles the tokens appropriately\n\n");
-    
-    printf("\nWhat did I want to achieve by writing all of this?\nI wanted to demonstrate that while I did not get the calculator fully functioning,\nI did accomplish quite a bit and my failure was not because I procrastinated or did not put the time in.\nIt was because I did not adequately plan for this project.\nI never really had to before, and learning that lesson the hard way was the most valuable thing I got out of this PEX.\nIn the end, I have the pieces of the program I need but I was unable to put them all together\n\n **Set view to false at the top of main to run my roughly 1700 lines of code as they are**\n\n");
-    }
-    else {
-    printf("If you wish to exit at any time, press enter\n");
-    printf("Please separate numbers and operators with spaces\n");
+    printf("Welcome the RPN calculator that took me roughly 60 hours and 1800 lines of code to complete.\nIt took me so long because I did not plan it out very well.\nI think I did this pex about as inefficiently as possible.\n\n");
+    printf("If you wish to exit at any time, press enter\n\n");
+    printf("Please separate numbers and operators with spaces and enter decimals as: 0.33 or 1.28\n");
+    printf("Please enter the unary minus directly next to the number you wish to make negative\n");
+    printf("\nAfter extensive testing I have found a couple problems I can't explain or correct\n1. After a few expressions are evaluated or sometimes even after just one, the next one will have an operator from the last equation in the rpn\nwhich causes the current one to incorrectly evaluate\n2. It is impossible for me to have fractions fo to the power of another fraction or whole number and vis versa.\nThe way the rpn comes out, it makes doing exponents look identical to other operations and there is no way to tell them apart.\n3. In longer equations, minus signs cause problems due to the way I check for negative numbers and fractions.\nIt can't really be corrected without throwing other stuff off.\n\n");
+    printf("**Make sure to actually type everything out and not use autocomplete features**\n\n");
     char print[256] = "";
     char output[255] = "";
     char print1[256] = ""; //needed to get the string without the newline
-    Stack* opStack = stackInit();
         
         do {
+            Stack* opStack = stackInit();
             printf("Enter your equation:\n");
             fgets(print, 256, stdin);
             if (print[0] == '\n')
@@ -122,11 +44,11 @@ int main() {
             strcpy(print1, "");
             strcpy(output, "");
         } while (print[0] != '\n');
-        free(print1);
-        free(print);
-        free(opStack);
-    }
+    
+        //free(print1);
+        //free(print);
+        
     
     
 	return 0;
-	}
+}

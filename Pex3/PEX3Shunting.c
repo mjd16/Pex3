@@ -57,7 +57,7 @@ char* convertToRPN(char* str, char* output, Stack* opStack)
             strcat(output, " ");
         }
         //if it is a character, then do this giant mess that I somehow came up
-        else if (isCharOp(token[0]) && token[0] != '\0'){
+        else if (isCharOp(token[0]) && token[0] != '\0' && !isdigit(token[1])){
             char op = token[0];
             while(stackPeek(*opStack) != (int)'(' && popOperators(op, stackPeek(*opStack), opStack)){
                 popped = convertIntToChar(stackPop(opStack));
@@ -97,7 +97,7 @@ char* convertToRPN(char* str, char* output, Stack* opStack)
         else
             stackPop(opStack);
     }
-    
+    free(opStack);
     return output;
 }
 
@@ -169,21 +169,24 @@ bool isValidString(char* str){
             leftPCounter++;
         if (str[i] == ')')
             rightPCounter++;
-        if (str[i] == '-'){
-            if (str[i+1] != ' ' || !isdigit(str[i+1]))
-                return false;
-        }
-        if (isCharOp(str[i]) && str[i] != '-'){
-            if (isCharOp(str[i+1]))
-                return false;
-            if (str[i+1] != '\0')
-                if (isCharOp(str[i+2]) && str[i+2] != '-')
-                    return false;
-        }
         i++;
     }
     if (leftPCounter != rightPCounter)
         return false;
+    
+    int c = 0;
+    int counter = 0;
+    while (str[c] != '\0'){
+        if (isdigit(str[c]))
+            counter = 0;
+        if (isCharOp(str[c]) && str[c] != '-')
+            counter++;
+        if (counter >= 2){
+            if (!isdigit(str[c+2]))
+                return false;
+        }
+        c++;
+    }
     //if it makes it through all of that it's prolly true
     return true;
 }
