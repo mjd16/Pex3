@@ -27,22 +27,27 @@ char* doAllMath(char* str){
     char arg1[22] = "";
     char arg2[22] = "";
     
+    //initialize the stack and the output string
     StackMath* stack = stackMathInit();
-    char result[255] = "";
+    char result[256] = "";
 
     int i = 0;
+    
     while(str[0] != '\0'){
-        
+        //get the token from the rpn output
+        strcpy(result, "");
         strcpy(token[i], getTokenMath(str));
+        bool isMixed = false;
         str = str + strlen(token[i]) + 1;
-        
+        //if it is a mixed number (which in my rpn is an improper fraction) store it in the stack
         if (isMixedMath(token[i])){
+            isMixed = true;
             stackMathPush(stack, token[i]);
-        }
-        else if(isNum(token[i])){
+        } //if it is just a number, push it to the stack
+        else if(isNum(token[i]) && !isMixed){
             stackMathPush(stack, token[i]);
-        }
-        else if (isCharOp(token[i][0])){
+        } //if it is an operator, pop the top two arguments off the stack, determine what kind of number they are and do math with them appropriately
+        else if (isCharOp(token[i][0]) && !isMixed){
             strcpy(arg2, stackMathPop(stack));
             strcpy(arg1, stackMathPop(stack));
                         
@@ -56,7 +61,7 @@ char* doAllMath(char* str){
                     numer1[j] = arg1[j];
                     j++;
                 }
-                //getting to the next number
+                //getting to the next number in the string
                 int c = (int)strlen(numer1) + 3;
                 
                 int q = 0;
@@ -75,7 +80,7 @@ char* doAllMath(char* str){
                         numer2[j] = arg2[j];
                         j++;
                     }
-                    //getting to the next number
+                    //getting to the next number in the string
                     int c = (int)strlen(numer2)+3;
                     
                     int q = 0;
@@ -83,12 +88,14 @@ char* doAllMath(char* str){
                         denom2[q] = arg2[c];
                         c++;
                         q++;
-                    }
-                    strcpy(result, bigMathTwoFrac(atoi(numer1),atoi(denom1),atoi(numer2),atoi(denom2),token[i][0]));
+                    } //do the math with the two fractions and the operator stored in token
+                    stackMathPush(stack, bigMathTwoFrac(atoi(numer1),atoi(denom1),atoi(numer2),atoi(denom2),token[i][0]));
+                    
                 } //end of second number also fraction (first is a fraction)
                 else if (!isFrac(arg2)){
                     int num = atoi(arg2);
-                    strcpy(result, bigMathOneFracFracFirst(atoi(numer1),atoi(denom1),num,token[i][0]));
+                    stackMathPush(stack, bigMathOneFracFracFirst(atoi(numer1),atoi(denom1),num,token[i][0]));
+
                 } // end of second number whole and first fraction
             }// end of first number is a fraction
             
@@ -106,7 +113,7 @@ char* doAllMath(char* str){
                         numer1[j] = arg2[j];
                         j++;
                     }
-                    //getting to the next number
+                    //getting to the next number in the string
                     int c = (int)strlen(numer1) + 3;
                     
                     int q = 0;
@@ -115,21 +122,23 @@ char* doAllMath(char* str){
                         c++;
                         q++;
                     }
-                    strcpy(result, bigMathOneFracWholeFirst(atoi(numer1), atoi(denom1), number, token[i][0]));
+                    stackMathPush(stack, bigMathOneFracWholeFirst(atoi(numer1), atoi(denom1), number, token[i][0]));
+                    
                 }
                 else if (!isFrac(arg2) && !isFrac(arg1)){
                     int number2 = atoi(arg2);
                     char op = token[i][0];
-                    strcpy(result, bigMath(number, number2, op));
+                    stackMathPush(stack, bigMath(number, number2, op));
                 }
             } //end of first argument is a number
             
-            stackMathPush(stack, result);
         }//end of if char is opp
         i++;
     }
-    stackMathPop(stack);
+    //pop last thing off the stack, should be the result
+    strcpy(result, stackMathPop(stack));
     free(stack);
+    //making a returnable string because I needed a static string to do the work and needed to return a pointer
     char *retun = malloc(sizeof(char)*255);
     strcpy(retun, result);
     return retun;
@@ -140,6 +149,7 @@ char* doAllMath(char* str){
  @return whether or not it is a fraction*/
 bool isFrac(char* str){
     int i = 0;
+    //simply checks if a string has a division sign in it, used in doAllMath to check what kind of number was popped
     while (str[i] != '\0'){
         if (str[i] == '/')
             return true;
@@ -164,7 +174,7 @@ char* bigMath(int num1, int num2, char operation) {
             sprintf(ret, "%d", num1 * num2);
                 return ret;
 	case '/':
-            sprintf(ret, "%d / %d", num1, num2);
+            ret = reduceFrac(num1,num2);
                 return ret;
 	case '^':
             sprintf(ret, "%d", (int)pow(num1, num2));
@@ -214,6 +224,7 @@ char* bigMathTwoFrac(int num1, int num2, int num3, int num4, char op) { //nums 1
 		ret = reduceFrac(numerator, denominator);
 		return ret;
 	case '^':
+            //could never really tell if this worked because it rarely got called due to my issue stated in the intro
         base = (double)num1 / num2;
         power = (double)num3 / num4;
         ans = pow(base, power);
@@ -260,7 +271,7 @@ char* bigMathOneFracFracFirst(int num, int denom, int number, char op) {
 		denominator = denom * number;
 		ret = reduceFrac(numerator, denominator);
 		return ret;
-    case '^':
+    case '^': //also do not know if this ever really worked for the same problem stated in the intro
         ans = pow((double)num / (double)denom, number);
         sprintf(ret, "%.3lf", ans);
         return ret;
@@ -320,10 +331,13 @@ char* bigMathOneFracWholeFirst(int num, int denom, int number, char op) {
 char* reduceFrac(int numer, int denom) {
 	int num1 = 0;
 	int num2 = 0;
+    //gets the greatest common denominator of the numerator and denominator
 	int greatDenom = gcd(abs(numer), abs(denom));
+    //divides each by the gcd to get the reduced numerator and denominator
 	num1 = numer / greatDenom;
 	num2 = denom / greatDenom;
 	char ret1[22] = "nothing";
+    //all of this string stuff to make a suitable output with a division symbol in it
 	if (strcmp(ret1, "\0")) {
 		sprintf(ret1, "%d", num1);
 		strcat(ret1, " / ");
@@ -337,6 +351,8 @@ char* reduceFrac(int numer, int denom) {
         strcat(ret1, ret2);
         retu = ret1;
     }
+    else if (num1 % num2 == 0)
+        sprintf(retu, "%d", num1 / num2);
     else
         sprintf(retu, "%d", num1);
     
@@ -360,11 +376,12 @@ int gcd(int one, int two) {
  @param num is the string to be checked
  @return a boolean indicating whether it is a mixed number or not */
 bool isMixedNum(char* num) {
-    
+    //checks if it is a negative, no need to store if it is or not
 	if (num[0] == '-') {
 		num++;
 	}
     
+    //if it finds an operator other than a minus sign before three digits are read, it can't be a mixed number
     int c = 0;
     int spaces = 0;
     while (num[c] != '\0' && spaces < 4){
@@ -452,6 +469,7 @@ bool isMixedNum(char* num) {
 * @param  num is the number to convert
 * @return  the number in equivalent fraction form*/
 char* convertMixedToFraction(char* num) {
+    //this function is very much the same as isMixedNum but it converts it at the end
     bool isNeg = false;
     if (num[0] == '-') {
         isNeg = true;
@@ -538,13 +556,13 @@ bool isRational(char* str){
 @param str is the token to be converted
 @return the converted string*/
 char* convertRationalToFrac(char* str){
+    //checks if it is a negative and stores that information
     bool isNeg = false;
     if (str[0] == '-'){
         isNeg = true;
         str++;
-        
     }
-    
+    //gets the whole number in front
     int counter = 0;
     char wholeNum[22] = "";
     char dec[22] = "";
@@ -561,7 +579,7 @@ char* convertRationalToFrac(char* str){
         i++;
         c++;
     }
-    
+    //does some math I found on stackOverflow and returns a fraction that is close to the answer
     int whole = atoi(wholeNum);
     counter = (int)strlen(dec);
     int denom = (int)pow(10,counter) - 1;
